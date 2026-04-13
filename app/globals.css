@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-deep: #030712;
+  --bg-elevated: #0b1220;
+  --bg-card: rgba(15, 23, 42, 0.72);
+  --border-subtle: rgba(148, 163, 184, 0.12);
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-a: #22d3ee;
+  --accent-b: #a78bfa;
+  --accent-glow: rgba(34, 211, 238, 0.35);
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg-deep: var(--bg-deep);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-card: var(--bg-card);
+  --color-border-subtle: var(--border-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-accent-a: var(--accent-a);
+  --color-accent-b: var(--accent-b);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-syne);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(167, 139, 250, 0.35);
+  color: #fff;
+}
+
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.25), rgba(167, 139, 250, 0.2));
+  padding: 1px;
+  border-radius: var(--radius-xl);
+}
+
+.gradient-border > .inner {
+  border-radius: calc(var(--radius-xl) - 1px);
+  background: var(--bg-elevated);
+}
+
+.glass {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+.prose-portfolio {
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.prose-portfolio h2 {
+  font-family: var(--font-syne), var(--font-geist-sans), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-portfolio p {
+  margin-bottom: 0.75rem;
+}
+
+.prose-portfolio strong {
+  color: var(--text-primary);
+}
+
+.prose-portfolio ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-portfolio a {
+  color: var(--accent-a);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

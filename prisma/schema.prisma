@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum PortfolioCategory {
+  FUNNELS
+  WEBSITES
+  AUTOMATIONS
+  CRM_SYSTEMS
+}
+
+model PortfolioItem {
+  id               String            @id @default(cuid()) @map("_id")
+  title            String
+  slug             String            @unique
+  category         PortfolioCategory
+  shortDescription String
+  description      String            @default("")
+  thumbnailUrl     String
+  galleryUrls      String            @default("[]")
+  tags             String            @default("[]")
+  tools            String            @default("[]")
+  problem          String            @default("")
+  solution         String            @default("")
+  results          String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model ContactMessage {
+  id          String   @id @default(cuid()) @map("_id")
+  name        String
+  email       String
+  projectType String
+  message     String
+  createdAt   DateTime @default(now())
+}
